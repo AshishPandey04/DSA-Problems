@@ -47,13 +47,43 @@ void upperCaseTOLowerCase(char arr[], int n)
     cout << arr << endl;
 }
 
+bool palindrome(char arr[],int n ){
+    int len = getLength(arr,n);
+    int i =0 ;
+    int j = len-1;
+    while(i<=j){
+        if(arr[i]!=arr[j]){
+            return false;
+        }
+        i++;
+        j--;
+    }
+    return true;
+}
+
 int main()
 {
 
+
     char arr[100];
-    cin.getline(arr, 100);
-    upperCaseTOLowerCase(arr, 10);
-    // for converting to lowercase => use formula: ch=ch-'A'+'a';
+    cin.getline(arr,100);
+    bool res= palindrome(arr,100);
+    if(res){
+        cout<<"the word is palindrome"<<endl;
+    }
+    else{
+        cout<<"the word is not palindrome"<<endl;
+    }
+
+
+
+
+
+
+    // char arr[100];
+    // cin.getline(arr, 100);
+    // upperCaseTOLowerCase(arr, 10);
+    // // for converting to lowercase => use formula: ch=ch-'A'+'a';
 
 
 
