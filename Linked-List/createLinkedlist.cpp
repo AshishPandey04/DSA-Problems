@@ -60,8 +60,90 @@ void print(Node* &head){
     }
     cout<<endl;
 }
+// length of LL
+int length(Node* &head){
+    int len=0;
+    Node* temp=head;
+    while(temp!=NULL){
+        len++;
+        temp=temp->next;
+    }
+    return len;
+
+}
+
+void insertAtPos(int pos,int val,Node* &head, Node* &tail){
+    int len=length(head);
+    // assume ur giving valid pos;
+    if(pos==1){
+        insertAtHead(val,head,tail);
+    }else if(pos==len+1){
+        insertAtTail(val,head,tail);
+    }
+    else{
+        int c=1;
+        Node* temp=head;
+        while(temp!=NULL){
+            if(c==pos-1){
+                Node* newNode=new Node(val);
+                newNode->next=temp->next;
+                temp->next=newNode;
+                break;
+
+            }
+            c++;
+            temp=temp->next;
+        }
 
 
+    }
+
+}
+void deleteNode(int pos,Node* &head,Node* &tail){
+    // if LL is empty
+    if(head==NULL && tail == NULL){
+        cout<<"LL is empty"<<endl;
+        return;
+    }
+    else if(head==tail){
+        Node* temp = head;
+        head=NULL;
+        tail=NULL;
+        delete temp; 
+    }else{
+        // agar pehla element delete karna ho 
+        if(pos==1){
+            Node* temp=head;
+            head=temp->next;
+            temp->next=NULL;
+            delete temp;
+        }else{
+            Node* temp=head;
+            int c=1;
+            while(temp!=NULL){
+                if(c==pos-1){
+                    Node* nodeToBeDelete=temp->next;
+                    temp->next=nodeToBeDelete->next;
+                    nodeToBeDelete->next=NULL;
+                    delete nodeToBeDelete;
+                    break;
+                }
+                temp=temp->next;
+                c++;
+            }
+        }
+    }
+}
+bool search(int val,Node* &head){
+    Node* temp=head;
+    while(temp!=NULL){
+        if(temp->data==val){
+            return true;
+        }
+        temp=temp->next;
+    }
+    return false;
+}
 
 int main(){
     Node* head=NULL;
@@ -70,7 +152,18 @@ int main(){
     insertAtTail(10,head,tail);
     insertAtTail(20,head,tail);
     insertAtTail(30,head,tail);
+    insertAtPos(2,200,head,tail);
 print(head);
+deleteNode(3,head,tail);
+print(head);
+deleteNode(3,head,tail);
+print(head);
+// bool isFound=search(30,head);
+// bool isFound=search(300,head);
+// cout<<isFound<<endl;
+
+// int len=length(head);
+// cout<<len<<endl;
 
 
     
